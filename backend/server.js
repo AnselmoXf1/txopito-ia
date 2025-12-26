@@ -29,9 +29,26 @@ const SyncService = require('./services/SyncService');
 
 const app = express();
 const server = createServer(app);
+
+// CORS configuration - handle both with and without trailing slash
+const corsOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
+  : [process.env.FRONTEND_URL || "http://localhost:3000"];
+
+// Add both versions (with and without trailing slash) to be safe
+const allOrigins = [];
+corsOrigins.forEach(origin => {
+  allOrigins.push(origin);
+  if (origin.endsWith('/')) {
+    allOrigins.push(origin.slice(0, -1)); // Remove trailing slash
+  } else {
+    allOrigins.push(origin + '/'); // Add trailing slash
+  }
+});
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: allOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"]
   }
 });
@@ -73,7 +90,7 @@ const authLimiter = rateLimit({
 app.use(compression());
 app.use(morgan('combined'));
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  origin: allOrigins,
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
