@@ -5,10 +5,10 @@
   
   **O assistente de IA mais avançado e inteligente de Moçambique**
   
-  [![Deploy Status](https://img.shields.io/badge/deploy-ready-brightgreen)](https://github.com/anselmobistiro/txopito-ia)
-  [![Version](https://img.shields.io/badge/version-2.0.0-blue)](https://github.com/anselmobistiro/txopito-ia)
+  [![Deploy Status](https://img.shields.io/badge/deploy-ready-brightgreen)](https://github.com/AnselmoXf1/txopito-ia)
+  [![Version](https://img.shields.io/badge/version-2.0.0-blue)](https://github.com/AnselmoXf1/txopito-ia)
   [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-  [![Made in Mozambique](https://img.shields.io/badge/made%20in-Mozambique-red)](https://github.com/anselmobistiro/txopito-ia)
+  [![Made in Mozambique](https://img.shields.io/badge/made%20in-Mozambique-red)](https://github.com/AnselmoXf1/txopito-ia)
 </div>
 
 ## 🎯 Sobre o Txopito IA
