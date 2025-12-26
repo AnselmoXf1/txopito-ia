@@ -82,11 +82,10 @@ export class ApiKeyManager {
     }
     
     // Adicionar chaves de backup para rotação automática
-    // Você pode adicionar mais chaves aqui conforme necessário
     const backupKeys = [
-      // Adicione suas chaves de backup aqui quando tiver
-      // { key: 'AIzaSy...', name: 'Chave Backup #1' },
-      // { key: 'AIzaSy...', name: 'Chave Backup #2' },
+      { key: 'AIzaSyBIUwxf9sLR6DrGZ8BLQHyrf_fjzPpX408', name: 'Chave Backup #1' },
+      { key: 'AIzaSyC6ER1G5ufI4p-SMgfguZXIfICRKYa0UlE', name: 'Chave Backup #2' },
+      { key: 'AIzaSyAU41QrEUuGQOuHMdAZjI-TZKr4jFnM_O4', name: 'Chave Backup #3' },
     ];
     
     backupKeys.forEach((apiKey, index) => {
