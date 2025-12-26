@@ -17,6 +17,7 @@ const syncRoutes = require('./routes/sync');
 const adminRoutes = require('./routes/admin');
 const backupRoutes = require('./routes/backup');
 const otpRoutes = require('./routes/otp');
+const geminiRoutes = require('./routes/gemini');
 
 // Importar middlewares
 const authMiddleware = require('./middleware/auth');
@@ -104,6 +105,7 @@ app.use('/api/sync', authMiddleware, syncRoutes);
 app.use('/api/admin', authMiddleware, adminRoutes);
 app.use('/api/backup', authMiddleware, backupRoutes);
 app.use('/api/otp', otpRoutes);
+app.use('/api/gemini', geminiRoutes); // Endpoint público com rate limiting próprio
 
 // Rota de saúde
 app.get('/api/health', (req, res) => {
@@ -113,7 +115,8 @@ app.get('/api/health', (req, res) => {
     version: '1.0.0',
     services: {
       database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-      backup: BackupService.isRunning() ? 'active' : 'inactive'
+      backup: BackupService.isRunning() ? 'active' : 'inactive',
+      gemini: process.env.GEMINI_API_KEY ? 'configured' : 'not configured'
     }
   });
 });
@@ -131,7 +134,8 @@ app.get('/', (req, res) => {
       conversations: '/api/conversations',
       sync: '/api/sync',
       admin: '/api/admin',
-      backup: '/api/backup'
+      backup: '/api/backup',
+      gemini: '/api/gemini'
     }
   });
 });
