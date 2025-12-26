@@ -1,0 +1,287 @@
+/* Configurações de Aparência - Txopito IA */
+
+/* Tamanhos de Fonte */
+.font-small {
+  --font-size-base: 0.875rem;
+  --font-size-sm: 0.75rem;
+  --font-size-lg: 1rem;
+  --font-size-xl: 1.125rem;
+}
+
+.font-medium {
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+}
+
+.font-large {
+  --font-size-base: 1.125rem;
+  --font-size-sm: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+}
+
+/* Aplicar tamanhos de fonte */
+html.font-small,
+html.font-medium,
+html.font-large {
+  font-size: var(--font-size-base);
+}
+
+html.font-small .text-sm,
+html.font-medium .text-sm,
+html.font-large .text-sm {
+  font-size: var(--font-size-sm);
+}
+
+html.font-small .text-lg,
+html.font-medium .text-lg,
+html.font-large .text-lg {
+  font-size: var(--font-size-lg);
+}
+
+html.font-small .text-xl,
+html.font-medium .text-xl,
+html.font-large .text-xl {
+  font-size: var(--font-size-xl);
+}
+
+/* Esquemas de Cores */
+[data-color-scheme="default"] {
+  --color-primary: #10b981;
+  --color-secondary: #3b82f6;
+  --color-accent: #8b5cf6;
+}
+
+[data-color-scheme="mozambique"] {
+  --color-primary: #16a34a;
+  --color-secondary: #eab308;
+  --color-accent: #dc2626;
+}
+
+[data-color-scheme="ocean"] {
+  --color-primary: #0ea5e9;
+  --color-secondary: #06b6d4;
+  --color-accent: #14b8a6;
+}
+
+[data-color-scheme="forest"] {
+  --color-primary: #16a34a;
+  --color-secondary: #10b981;
+  --color-accent: #84cc16;
+}
+
+[data-color-scheme="sunset"] {
+  --color-primary: #f97316;
+  --color-secondary: #ec4899;
+  --color-accent: #8b5cf6;
+}
+
+/* Aplicar cores personalizadas */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+/* Modo Compacto */
+.compact-mode {
+  --spacing-unit: 0.75;
+}
+
+.compact-mode .p-4 {
+  padding: calc(1rem * var(--spacing-unit));
+}
+
+.compact-mode .p-6 {
+  padding: calc(1.5rem * var(--spacing-unit));
+}
+
+.compact-mode .space-y-4 > * + * {
+  margin-top: calc(1rem * var(--spacing-unit));
+}
+
+.compact-mode .space-y-6 > * + * {
+  margin-top: calc(1.5rem * var(--spacing-unit));
+}
+
+.compact-mode .text-xl {
+  font-size: calc(1.25rem * var(--spacing-unit));
+}
+
+.compact-mode .text-2xl {
+  font-size: calc(1.5rem * var(--spacing-unit));
+}
+
+/* Desabilitar Animações */
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Tema Automático */
+@media (prefers-color-scheme: dark) {
+  html[data-theme="auto"] {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html[data-theme="auto"] {
+    color-scheme: light;
+  }
+}
+
+/* Configurações de Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .respect-motion-preference *,
+  .respect-motion-preference *::before,
+  .respect-motion-preference *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Configurações de Alto Contraste */
+@media (prefers-contrast: high) {
+  .high-contrast {
+    --color-primary: #000000;
+    --color-secondary: #ffffff;
+    --color-accent: #0000ff;
+  }
+  
+  .high-contrast .border {
+    border-width: 2px;
+  }
+  
+  .high-contrast .text-gray-500 {
+    color: #000000;
+  }
+  
+  .high-contrast .bg-gray-100 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+  }
+}
+
+/* Configurações para Modo Desenvolvedor */
+.developer-mode .debug-info {
+  display: block !important;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00ff00;
+  padding: 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  z-index: 9999;
+}
+
+.developer-mode .debug-border {
+  border: 1px dashed #ff0000 !important;
+}
+
+/* Recursos Experimentais */
+.experimental-features .beta-badge {
+  display: inline-block;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 4px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Configurações de Performance */
+.performance-mode {
+  will-change: auto;
+}
+
+.performance-mode * {
+  will-change: auto;
+}
+
+.performance-mode .animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.performance-mode .animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Configurações de Impressão */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-friendly {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Configurações Responsivas Avançadas */
+@media (max-width: 640px) {
+  .mobile-optimized .text-base {
+    font-size: 16px; /* Evitar zoom no iOS */
+  }
+  
+  .mobile-optimized input,
+  .mobile-optimized textarea {
+    font-size: 16px; /* Evitar zoom no iOS */
+  }
+}
+
+/* Configurações de Bateria Baixa */
+@media (battery: low) {
+  .battery-saver * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .battery-saver .animate-spin,
+  .battery-saver .animate-pulse,
+  .battery-saver .animate-bounce {
+    animation: none !important;
+  }
+}

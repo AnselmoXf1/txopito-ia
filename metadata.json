@@ -1,0 +1,7 @@
+{
+  "name": "Txopito IA",
+  "description": "Uma inteligência artificial moçambicana focada em história, cultura, educação e tecnologia, ajudando estudantes e curiosos a aprender sobre Moçambique.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

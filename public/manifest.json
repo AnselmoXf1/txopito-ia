@@ -1,0 +1,29 @@
+{
+  "name": "Txopito IA - Assistente Moçambicana",
+  "short_name": "Txopito IA",
+  "description": "A primeira IA verdadeiramente moçambicana",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["productivity", "education", "utilities"],
+  "lang": "pt-MZ",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}
