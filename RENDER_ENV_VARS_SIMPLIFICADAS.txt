@@ -1,0 +1,54 @@
+# 🔧 VARIÁVEIS DE AMBIENTE SIMPLIFICADAS PARA O RENDER
+# 
+# COPIAR E COLAR NO DASHBOARD DO RENDER
+# Dashboard > Seu Serviço > Environment > Bulk Edit
+
+# ===== CONFIGURAÇÃO BÁSICA =====
+NODE_ENV=production
+PORT=5000
+
+# ===== CHAVE ÚNICA DO GEMINI =====
+# ✅ USANDO APENAS UMA CHAVE (A QUE ESTÁ FUNCIONANDO)
+GEMINI_API_KEY=AIzaSyAvGLE3ZCk62qoPA33clgUCyyIqCal1qEM
+
+# ===== MONGODB =====
+MONGODB_URI=mongodb+srv://txopito-admin:TxopitoIA2024!@txopito-ia-cluster.nslcyy0.mongodb.net/txopito-ia?retryWrites=true&w=majority
+
+# ===== JWT E SEGURANÇA =====
+JWT_SECRET=txopito_jwt_secret_muito_seguro_2024_anselmo_bistiro_gulane
+JWT_EXPIRES_IN=7d
+
+# ===== EMAIL =====
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=deeppianovibes@gmail.com
+EMAIL_PASS=hrgffnyfycnmqamo
+
+# ===== FRONTEND URL =====
+FRONTEND_URL=https://txopito-ia.vercel.app
+
+# ===== RATE LIMITING =====
+RATE_LIMIT_MAX_REQUESTS=100
+RATE_LIMIT_WINDOW_MS=900000
+AUTH_RATE_LIMIT_MAX=5
+
+# ===== LOGS =====
+LOG_LEVEL=info
+LOG_FILE=logs/txopito-backend.log
+
+# ===== BACKUP =====
+BACKUP_RETENTION_DAYS=30
+BACKUP_SCHEDULE=0 2 * * *
+
+# ===== CLOUDINARY (OPCIONAL) =====
+CLOUDINARY_CLOUD_NAME=seu_cloud_name
+CLOUDINARY_API_KEY=sua_api_key
+CLOUDINARY_API_SECRET=seu_api_secret
+
+# ===== RENDER ESPECÍFICO =====
+# (Estas são geradas automaticamente pelo Render)
+# Render_Dashboard=Environment
+# d=8be6ee30da76b046715285b551246c40d
+# dd=998ff46b7f58e4c2df071daf899d61bad
+# ddf=e34ab8833727d457e6e3893067660cea
+# k=09dd73a90e7efec8c789861f2c08de11

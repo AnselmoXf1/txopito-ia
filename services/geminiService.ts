@@ -43,11 +43,8 @@ export class GeminiService {
 
   // Tentar próxima chave em caso de erro
   private tryNextKey(): boolean {
-    const rotated = apiKeyManager.rotateToNextKey();
-    if (rotated) {
-      this.initializeWithCurrentKey();
-      return this.isInitialized;
-    }
+    // Sistema simplificado - não roda chaves automaticamente
+    console.log('⚠️ Sistema configurado para chave única - não há rotação automática');
     return false;
   }
 
@@ -309,9 +306,9 @@ export class GeminiService {
     
     Evita listas muito longas e explicações excessivamente detalhadas a menos que seja especificamente pedido.`;
 
-    // Tentar gerar resposta com sistema de rotação de chaves
+    // Tentar gerar resposta com chave única
     let attempts = 0;
-    const maxAttempts = 3;
+    const maxAttempts = 1; // Sistema simplificado - apenas 1 tentativa
 
     while (attempts < maxAttempts) {
       attempts++;
@@ -411,13 +408,7 @@ export class GeminiService {
             apiKeyManager.markKeyAsQuotaExceeded(this.currentKeyId, 'Quota excedida');
           }
           
-          // Tentar próxima chave
-          if (this.tryNextKey()) {
-            console.log(`🔄 Tentando com próxima chave (tentativa ${attempts}/${maxAttempts})`);
-            continue; // Tentar novamente com nova chave
-          } else {
-            throw new Error('⏰ Todas as chaves API excederam a quota. Adiciona mais chaves ou aguarda a renovação.');
-          }
+          throw new Error('⏰ Quota da chave API excedida. Aguarda a renovação ou gera uma nova chave em https://aistudio.google.com/app/apikey');
         }
         
         // Tratar erros de chave inválida
@@ -426,13 +417,7 @@ export class GeminiService {
             apiKeyManager.markKeyError(this.currentKeyId, 'Chave inválida');
           }
           
-          // Tentar próxima chave
-          if (this.tryNextKey()) {
-            console.log(`🔄 Chave inválida, tentando próxima (tentativa ${attempts}/${maxAttempts})`);
-            continue;
-          } else {
-            throw new Error('🔑 Todas as chaves API são inválidas. Verifica as chaves no painel de administração.');
-          }
+          throw new Error('🔑 Chave API inválida. Verifica a chave no arquivo .env.local ou gera uma nova em https://aistudio.google.com/app/apikey');
         }
         
         // Outros erros específicos
@@ -461,15 +446,8 @@ export class GeminiService {
           apiKeyManager.markKeyError(this.currentKeyId, error.message);
         }
         
-        // Se é a última tentativa, lançar erro
-        if (attempts >= maxAttempts) {
-          throw new Error(`💥 Erro na comunicação com a IA após ${maxAttempts} tentativas: ${error.message}`);
-        }
-        
-        // Tentar próxima chave para outros erros
-        if (!this.tryNextKey()) {
-          throw new Error('💥 Nenhuma chave API disponível para tentar novamente.');
-        }
+        // Lançar erro diretamente
+        throw new Error(`💥 Erro na comunicação com a IA: ${error.message}`);
       }
     }
     

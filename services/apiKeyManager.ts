@@ -68,48 +68,25 @@ export class ApiKeyManager {
 
   // Adicionar chave padrão do ambiente
   private addDefaultKey(): void {
-    console.log('🔄 Inicializando sistema de rotação automática...');
+    console.log('🔄 Inicializando sistema com chave única...');
     
     // Chave principal do .env
     const defaultKey = import.meta.env.VITE_GEMINI_API_KEY;
     if (defaultKey && defaultKey.trim().length > 0 && defaultKey !== 'SUA_NOVA_CHAVE_AQUI') {
       try {
-        this.addKeyInternal(defaultKey, 'Chave Principal (Ativa)');
+        this.addKeyInternal(defaultKey, 'Chave Gemini Principal');
         console.log('✅ Chave principal adicionada com sucesso');
       } catch (error) {
         console.error('❌ Erro ao adicionar chave principal:', error);
       }
     }
     
-    // Adicionar chaves de backup para rotação automática
-    const backupKeys = [
-      { key: 'AIzaSyBIUwxf9sLR6DrGZ8BLQHyrf_fjzPpX408', name: 'Chave Backup #1' },
-      { key: 'AIzaSyC6ER1G5ufI4p-SMgfguZXIfICRKYa0UlE', name: 'Chave Backup #2' },
-      { key: 'AIzaSyAU41QrEUuGQOuHMdAZjI-TZKr4jFnM_O4', name: 'Chave Backup #3' },
-    ];
-    
-    backupKeys.forEach((apiKey, index) => {
-      const exists = this.keys.find(k => k.key === apiKey.key);
-      if (!exists) {
-        try {
-          this.addKeyInternal(apiKey.key, apiKey.name);
-          console.log(`✅ ${apiKey.name} adicionada com sucesso`);
-        } catch (error) {
-          console.error(`❌ Erro ao adicionar ${apiKey.name}:`, error);
-        }
-      }
-    });
-    
     if (this.keys.length === 0) {
       console.error('🚨 SISTEMA SEM CHAVES API VÁLIDAS!');
-      console.error('🔑 Gere novas chaves em: https://aistudio.google.com/app/apikey');
+      console.error('🔑 Gere uma nova chave em: https://aistudio.google.com/app/apikey');
     } else {
-      console.log(`🎉 Sistema inicializado com ${this.keys.length} chave(s) API`);
-      if (this.keys.length > 1) {
-        console.log('🔄 Rotação automática ativada para tolerância a falhas');
-      } else {
-        console.log('⚠️ Apenas 1 chave disponível - adicione mais chaves para rotação automática');
-      }
+      console.log(`🎉 Sistema inicializado com ${this.keys.length} chave API`);
+      console.log('✅ Sistema configurado para usar chave única');
     }
   }
 
