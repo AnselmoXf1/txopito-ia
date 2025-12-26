@@ -1,33 +1,15 @@
-const CACHE_NAME = 'txopito-ia-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/index.tsx',
-  '/styles.css',
-  '/manifest.json'
-];
+// Service Worker Simplificado para Deploy
+const CACHE_NAME = 'txopito-ia-v2';
 
-// Install event
+// Install - cache básico
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
-  );
+  console.log('SW: Install');
+  self.skipWaiting();
 });
 
-// Fetch event
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      })
-  );
-});
-
-// Activate event
+// Activate - limpar cache antigo
 self.addEventListener('activate', (event) => {
+  console.log('SW: Activate');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -37,6 +19,28 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Fetch - sem cache agressivo para evitar problemas
+self.addEventListener('fetch', (event) => {
+  // Apenas para requests GET
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  
+  // Não cachear API calls
+  if (event.request.url.includes('/api/')) {
+    return;
+  }
+  
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      // Fallback apenas para navegação
+      if (event.request.mode === 'navigate') {
+        return caches.match('/index.html');
+      }
     })
   );
 });
