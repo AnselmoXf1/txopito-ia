@@ -68,31 +68,49 @@ export class ApiKeyManager {
 
   // Adicionar chave padrão do ambiente
   private addDefaultKey(): void {
-    // ⚠️ CHAVES ANTIGAS FORAM COMPROMETIDAS E BLOQUEADAS PELO GOOGLE
-    // Usar apenas a chave do .env que deve ser atualizada com nova chave válida
+    console.log('🔄 Inicializando sistema de rotação automática...');
     
-    console.log('🔄 Inicializando sistema com chave do ambiente...');
-    
-    // Usar apenas chave do .env (deve ser nova e válida)
+    // Chave principal do .env
     const defaultKey = import.meta.env.VITE_GEMINI_API_KEY;
     if (defaultKey && defaultKey.trim().length > 0 && defaultKey !== 'SUA_NOVA_CHAVE_AQUI') {
       try {
-        this.addKeyInternal(defaultKey, 'Chave Principal (Nova)');
-        console.log('✅ Nova chave API adicionada com sucesso');
-        console.log('🔄 Sistema pronto para uso com chave válida');
+        this.addKeyInternal(defaultKey, 'Chave Principal (Ativa)');
+        console.log('✅ Chave principal adicionada com sucesso');
       } catch (error) {
-        console.error('❌ Erro ao adicionar nova chave:', error);
+        console.error('❌ Erro ao adicionar chave principal:', error);
       }
-    } else {
-      console.warn('⚠️ Nenhuma chave API válida encontrada no .env!');
-      console.warn('📝 Configure VITE_GEMINI_API_KEY com uma chave válida');
     }
+    
+    // Adicionar chaves de backup para rotação automática
+    // Você pode adicionar mais chaves aqui conforme necessário
+    const backupKeys = [
+      // Adicione suas chaves de backup aqui quando tiver
+      // { key: 'AIzaSy...', name: 'Chave Backup #1' },
+      // { key: 'AIzaSy...', name: 'Chave Backup #2' },
+    ];
+    
+    backupKeys.forEach((apiKey, index) => {
+      const exists = this.keys.find(k => k.key === apiKey.key);
+      if (!exists) {
+        try {
+          this.addKeyInternal(apiKey.key, apiKey.name);
+          console.log(`✅ ${apiKey.name} adicionada com sucesso`);
+        } catch (error) {
+          console.error(`❌ Erro ao adicionar ${apiKey.name}:`, error);
+        }
+      }
+    });
     
     if (this.keys.length === 0) {
       console.error('🚨 SISTEMA SEM CHAVES API VÁLIDAS!');
       console.error('🔑 Gere novas chaves em: https://aistudio.google.com/app/apikey');
     } else {
       console.log(`🎉 Sistema inicializado com ${this.keys.length} chave(s) API`);
+      if (this.keys.length > 1) {
+        console.log('🔄 Rotação automática ativada para tolerância a falhas');
+      } else {
+        console.log('⚠️ Apenas 1 chave disponível - adicione mais chaves para rotação automática');
+      }
     }
   }
 
@@ -123,6 +141,27 @@ export class ApiKeyManager {
     };
     
     localStorage.setItem(ApiKeyManager.STATS_STORAGE, JSON.stringify(stats));
+  }
+
+  // Adicionar múltiplas chaves de uma vez
+  addMultipleKeys(keys: Array<{key: string, name: string}>): string[] {
+    const addedIds: string[] = [];
+    
+    keys.forEach((keyData, index) => {
+      try {
+        const id = this.addKey(keyData.key, keyData.name);
+        addedIds.push(id);
+        console.log(`✅ ${keyData.name} adicionada com sucesso`);
+      } catch (error) {
+        console.error(`❌ Erro ao adicionar ${keyData.name}:`, error);
+      }
+    });
+    
+    if (addedIds.length > 0) {
+      console.log(`🎉 ${addedIds.length} chaves adicionadas. Rotação automática ativada!`);
+    }
+    
+    return addedIds;
   }
 
   // Adicionar nova chave
