@@ -68,61 +68,31 @@ export class ApiKeyManager {
 
   // Adicionar chave padrão do ambiente
   private addDefaultKey(): void {
-    // Lista das 3 chaves fornecidas pelo utilizador
-    const API_KEYS = [
-      {
-        key: 'AIzaSyDst05_JK65CtieKNvqRZsWXv2kf9RVGQo',
-        name: 'Chave Principal #1'
-      },
-      {
-        key: 'AIzaSyDBXiZE0jJe2A8Xt9lqe5VsVT7fy8RAWAU', 
-        name: 'Chave Backup #2'
-      },
-      {
-        key: 'AIzaSyDaDKW5OPiYx_p605rqXfPqp-L7fw__psk',
-        name: 'Chave Reserva #3'
-      }
-    ];
-
-    console.log('🔄 Inicializando sistema com 3 chaves API...');
+    // ⚠️ CHAVES ANTIGAS FORAM COMPROMETIDAS E BLOQUEADAS PELO GOOGLE
+    // Usar apenas a chave do .env que deve ser atualizada com nova chave válida
     
-    let addedCount = 0;
+    console.log('🔄 Inicializando sistema com chave do ambiente...');
     
-    // Adicionar cada chave se não existir
-    API_KEYS.forEach((apiKey, index) => {
-      const exists = this.keys.find(k => k.key === apiKey.key);
-      if (!exists) {
-        try {
-          this.addKeyInternal(apiKey.key, apiKey.name);
-          addedCount++;
-          console.log(`✅ ${apiKey.name} adicionada com sucesso`);
-        } catch (error) {
-          console.error(`❌ Erro ao adicionar ${apiKey.name}:`, error);
-        }
-      } else {
-        console.log(`⚠️ ${apiKey.name} já existe no sistema`);
+    // Usar apenas chave do .env (deve ser nova e válida)
+    const defaultKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (defaultKey && defaultKey.trim().length > 0 && defaultKey !== 'SUA_NOVA_CHAVE_AQUI') {
+      try {
+        this.addKeyInternal(defaultKey, 'Chave Principal (Nova)');
+        console.log('✅ Nova chave API adicionada com sucesso');
+        console.log('🔄 Sistema pronto para uso com chave válida');
+      } catch (error) {
+        console.error('❌ Erro ao adicionar nova chave:', error);
       }
-    });
-    
-    // Fallback para chave do .env se nenhuma das 3 funcionou
-    if (this.keys.length === 0) {
-      const defaultKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (defaultKey && defaultKey.trim().length > 0 && !API_KEYS.find(k => k.key === defaultKey)) {
-        try {
-          this.addKeyInternal(defaultKey, 'Chave .env (Fallback)');
-          addedCount++;
-          console.log('✅ Chave .env adicionada como fallback');
-        } catch (error) {
-          console.error('❌ Erro ao adicionar chave .env:', error);
-        }
-      }
+    } else {
+      console.warn('⚠️ Nenhuma chave API válida encontrada no .env!');
+      console.warn('📝 Configure VITE_GEMINI_API_KEY com uma chave válida');
     }
     
-    if (addedCount > 0) {
-      console.log(`🎉 Sistema inicializado com ${this.keys.length} chaves API`);
-      console.log('🔄 Rotação automática ativada para tolerância a falhas');
-    } else if (this.keys.length === 0) {
-      console.warn('⚠️ Nenhuma chave API válida encontrada!');
+    if (this.keys.length === 0) {
+      console.error('🚨 SISTEMA SEM CHAVES API VÁLIDAS!');
+      console.error('🔑 Gere novas chaves em: https://aistudio.google.com/app/apikey');
+    } else {
+      console.log(`🎉 Sistema inicializado com ${this.keys.length} chave(s) API`);
     }
   }
 

@@ -13,7 +13,7 @@
 
 ## 🎯 Sobre o Txopito IA
 
-O **Txopito IA** é um assistente de inteligência artificial desenvolvido especificamente para Moçambique, combinando tecnologia de ponta com conhecimento local profundo. Criado por **Anselmo Dora Bistiro Gulane**, estudante de Engenharia Informática e Telecomunicações em Inhambane.
+O **Txopito IA** é um assistente de inteligência artificial desenvolvido especificamente para Moçambique, combinando tecnologia de ponta com conhecimento local profundo. Criado por **Anselmo Dora Bistiro Gulane**, estudante de Engenharia Informática e tecnologia em Inhambane.
 
 ### ✨ Características Principais
 
