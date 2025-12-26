@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { apiKeyManager } from '../services/apiKeyManager';
+import { geminiService } from '../services/geminiService';
 import { keyRotationService } from '../services/keyRotationService';
 import { UserService } from '../services/userService';
 import { storageService } from '../services/storageService';

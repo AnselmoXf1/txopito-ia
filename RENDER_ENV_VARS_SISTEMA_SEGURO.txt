@@ -1,0 +1,55 @@
+# 🔐 VARIÁVEIS DE AMBIENTE PARA SISTEMA SEGURO - RENDER
+# 
+# COPIAR E COLAR NO DASHBOARD DO RENDER
+# Dashboard > Seu Serviço Backend > Environment > Bulk Edit
+
+# ===== CONFIGURAÇÃO BÁSICA =====
+NODE_ENV=production
+PORT=5000
+
+# ===== CHAVE GEMINI SEGURA (APENAS NO BACKEND) =====
+# ✅ CHAVE PROTEGIDA NO SERVIDOR
+GEMINI_API_KEY=AIzaSyAvGLE3ZCk62qoPA33clgUCyyIqCal1qEM
+
+# ===== MONGODB =====
+MONGODB_URI=mongodb+srv://txopito-admin:TxopitoIA2024!@txopito-ia-cluster.nslcyy0.mongodb.net/txopito-ia?retryWrites=true&w=majority
+
+# ===== JWT E SEGURANÇA =====
+JWT_SECRET=txopito_jwt_secret_muito_seguro_2024_anselmo_bistiro_gulane
+JWT_EXPIRES_IN=7d
+
+# ===== EMAIL =====
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=deeppianovibes@gmail.com
+EMAIL_PASS=hrgffnyfycnmqamo
+
+# ===== FRONTEND URL =====
+FRONTEND_URL=https://txopito-ia.vercel.app
+
+# ===== RATE LIMITING =====
+RATE_LIMIT_MAX_REQUESTS=100
+RATE_LIMIT_WINDOW_MS=900000
+AUTH_RATE_LIMIT_MAX=5
+
+# ===== LOGS =====
+LOG_LEVEL=info
+LOG_FILE=logs/txopito-backend.log
+
+# ===== BACKUP =====
+BACKUP_RETENTION_DAYS=30
+BACKUP_SCHEDULE=0 2 * * *
+
+# ===== CLOUDINARY (OPCIONAL) =====
+CLOUDINARY_CLOUD_NAME=seu_cloud_name
+CLOUDINARY_API_KEY=sua_api_key
+CLOUDINARY_API_SECRET=seu_api_secret
+
+# ===== CORS (ATUALIZADO PARA SISTEMA SEGURO) =====
+CORS_ORIGIN=https://txopito-ia.vercel.app,http://localhost:3000
+
+# ===== SISTEMA SEGURO =====
+# A chave Gemini agora fica APENAS no backend
+# Frontend faz requisições para /api/gemini
+# Rate limiting específico para endpoints Gemini
+# Logs de todas as requisições IA

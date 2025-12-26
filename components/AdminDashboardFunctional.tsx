@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { backendService } from '../services/backendService';
-import { apiKeyManager } from '../services/apiKeyManager';
+import { geminiService } from '../services/geminiService';
 
 interface AdminDashboardFunctionalProps {
   onLogout: () => void;
@@ -38,10 +38,15 @@ const AdminDashboardFunctional: React.FC<AdminDashboardFunctionalProps> = ({ onL
   }, []);
 
   const loadApiKeys = () => {
-    const keys = apiKeyManager.getAllKeys();
-    const stats = apiKeyManager.getStats();
-    setApiKeys(keys);
-    setApiStats(stats);
+    // Sistema seguro - chaves geridas no backend
+    setApiKeys([]);
+    setApiStats({
+      totalKeys: 0,
+      activeKeys: 0,
+      quotaExceededKeys: 0,
+      currentKeyId: null,
+      lastRotation: null
+    });
   };
 
   const checkSystemStatus = async () => {
@@ -64,20 +69,7 @@ const AdminDashboardFunctional: React.FC<AdminDashboardFunctionalProps> = ({ onL
   };
 
   const handleAddApiKey = () => {
-    if (!newKeyName.trim() || !newKeyValue.trim()) {
-      alert('Preenche todos os campos');
-      return;
-    }
-
-    try {
-      apiKeyManager.addKey(newKeyValue.trim(), newKeyName.trim());
-      setNewKeyName('');
-      setNewKeyValue('');
-      loadApiKeys();
-      alert('✅ Chave API adicionada com sucesso!');
-    } catch (error: any) {
-      alert(`❌ Erro: ${error.message}`);
-    }
+    alert('🔐 Sistema Seguro: Chaves são geridas no backend. Contacta o administrador.');
   };
 
   const handleRemoveApiKey = (keyId: string) => {
