@@ -4,7 +4,7 @@
 Write-Host "🌐 CONECTAR AO BACKEND DO RENDER" -ForegroundColor Cyan
 Write-Host "===============================" -ForegroundColor Cyan
 
-$BACKEND_URL = "https://txopito-ia.onrender.com/api"
+$BACKEND_URL = "https://txopito-backend.onrender.com/api"
 Write-Host "🔗 URL: $BACKEND_URL" -ForegroundColor Yellow
 
 # Função para testar conexão

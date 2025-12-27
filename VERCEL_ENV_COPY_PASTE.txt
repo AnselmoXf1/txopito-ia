@@ -1,5 +1,5 @@
 VITE_GEMINI_API_KEY=AIzaSyDU7M_mNqPV6qitOs9DEvNG9vsAwwSeSMQ
-VITE_BACKEND_URL=https://txopito-ia.onrender.com/api
+VITE_BACKEND_URL=https://txopito-backend.onrender.com/api
 VITE_BACKEND_ENABLED=true
 VITE_ENVIRONMENT=production
 VITE_SYNC_INTERVAL=300000

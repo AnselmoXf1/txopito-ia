@@ -12,7 +12,7 @@ import dotenv from 'dotenv';
 // Carregar variáveis de ambiente
 dotenv.config({ path: '.env.local' });
 
-const BACKEND_URL = process.env.VITE_BACKEND_URL || 'https://txopito-ia.onrender.com/api';
+const BACKEND_URL = process.env.VITE_BACKEND_URL || 'https://txopito-backend.onrender.com/api';
 
 console.log('🌐 CONECTAR AO BACKEND DO RENDER');
 console.log('===============================');
